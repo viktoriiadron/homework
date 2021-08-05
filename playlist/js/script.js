@@ -16,22 +16,24 @@ let songsList = document.querySelector('.songs');
 let songsSource = [...songs];
 let addBtn = document.querySelector('.add');
 let addValue = document.querySelector('.input-box');
+let deleteEl = document.querySelector('.delete');
 
 addBtn.addEventListener('click', function addNewSong() {
   let element = {};
   element.name = String(addValue.value.trim());
   element.isLiked = false;
-  //songsSource.splice(songsSource.length, 0, element);
   songsSource.push(element);
-  console.log(songsSource);
+  //console.log(songsSource);
 
-  for (key of document.querySelectorAll('li')) {
-    key.remove();
-  }
-
+  removeList();
   addSong();
 })
 
+function removeList() {
+  for (key of document.querySelectorAll('li')) {
+    key.remove();
+  }
+}
 
 function addSong() {
   for (i = 0; i <= songsSource.length - 1; i++) {
@@ -62,5 +64,14 @@ function addButton(className, parent) {
   input.setAttribute('type', 'button');
   parent.append(input);
 }
+
+// не обращай внимания, я думала как добавить логику на кнопки :)
+// пусть побудет здесь
+
+// document.querySelector('.like').addEventListener('click', function like() {
+//   songsSource[target].isLiked = true;
+//   removeList();
+//   addSong();
+// })
 
 
