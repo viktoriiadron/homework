@@ -10,7 +10,6 @@ let songs = [{
 window.addEventListener('load', function () {
   // your cade should be started here
 
-  
 });
 
 let songsList = document.querySelector('.songs');
@@ -23,8 +22,16 @@ function addSong() {
     li.innerHTML = songsSource[i].name;
     console.log(songsSource[i].name);
     songsList.append(li);
-    addButton('like', li);
     addButton('delete', li);
+    addButton('like', li);
+    if (songsSource[i].isLiked === true) {
+      let img = document.createElement('img');
+      img.src = '../images/like.svg';
+      img.setAttribute('alt', 'heart');
+      img.classList.add('like-icon');
+      img.style.width = '7%';
+      songsList.append(img);
+    }
   }
 }
 
@@ -35,5 +42,6 @@ function addButton(className, parent) {
   input.classList.add(className);
   parent.append(input);
 }
+
 
 addSong();
