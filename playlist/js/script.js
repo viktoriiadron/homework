@@ -8,8 +8,9 @@ let songs = [{
 },];
 
 window.addEventListener('load', function () {
-addSong();
-
+  for (i = 0; i <= songsSource.length - 1; i++) {
+    addSong(i);
+  }
 });
 
 let songsList = document.querySelector('.songs');
@@ -23,28 +24,18 @@ addBtn.addEventListener('click', function addNewSong() {
   element.name = String(addValue.value.trim());
   element.isLiked = false;
   songsSource.push(element);
-  //console.log(songsSource);
 
-  removeList();
-  addSong();
+  addSong(songsSource.length-1);
 })
 
-function removeList() {
-  for (key of document.querySelectorAll('li')) {
-    key.remove();
-  }
-}
-
-function addSong() {
-  for (i = 0; i <= songsSource.length - 1; i++) {
+function addSong(element) {
     let li = document.createElement('li');
-    li.innerHTML = songsSource[i].name;
-    // console.log(songsSource[i].name);
+    li.innerHTML = songsSource[element].name;
     songsList.append(li);
     addButton('delete', li);
     addButton('like', li);
 
-    if (songsSource[i].isLiked === true) {
+    if (songsSource[element].isLiked === true) {
       let img = document.createElement('img');
       img.src = '../images/like.svg';
       img.setAttribute('alt', 'heart');
@@ -53,7 +44,6 @@ function addSong() {
       img.style.width = '7%';
       li.append(img);
     }
-  }
 }
 
 function addButton(className, parent) {
@@ -74,4 +64,10 @@ function addButton(className, parent) {
 //   addSong();
 // })
 
+
+// function removeList() {
+//   for (key of document.querySelectorAll('li')) {
+//     key.remove();
+//   }
+// }
 
