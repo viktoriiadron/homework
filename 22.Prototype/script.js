@@ -50,4 +50,33 @@ console.log(aspirant.isGrantHolder());
 
 // 2
 
+class Plane {
+    constructor (name) {
+        this.name = name;
+        this.isFlying = false;
+    }
+    takeOff() {
+        this.isFlying = true;
+    }
+    land() {
+        this.isFlying = false;
+    }
+}
 
+let airport = {
+    planes: [],
+    getFlyingPlanes() {
+        let flying = this.planes.filter(function isFlyingFunc(plane) {
+            return plane.isFlying === true;
+        });
+        console.log(flying)
+        return flying.length
+    }
+}
+
+let plane1 = new Plane("First");
+let plane2 = new Plane("Killer");
+plane2.takeOff();
+airport.planes.push(plane1, plane2);
+// console.log(airport.planes)
+console.log(airport.getFlyingPlanes());
