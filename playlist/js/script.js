@@ -11,21 +11,27 @@ window.addEventListener('load', function () {
   for (i = 0; i <= songsSource.length - 1; i++) {
     addSong(i);
   }
+  countSongs()
 });
+
 
 let songsList = document.querySelector('.songs');
 let songsSource = [...songs];
 let addBtn = document.querySelector('.add');
 let addValue = document.querySelector('.input-box');
-let deleteEl = document.querySelector('.delete');
+let count = document.querySelector('.count');
 
 addBtn.addEventListener('click', function addNewSong() {
-  let element = {};
+  if (addValue.value) {
+    let element = {};
   element.name = String(addValue.value.trim());
   element.isLiked = false;
   songsSource.push(element);
 
-  addSong(songsSource.length-1);
+  addSong(songsSource.length - 1);
+  addValue.value = '';
+    countSongs()
+  }
 })
 
 function addSong(element) {
@@ -33,16 +39,14 @@ function addSong(element) {
     li.innerHTML = songsSource[element].name;
     songsList.append(li);
     addButton('delete', li);
+  
+  if (songsSource[element].isLiked === true) {
+    addButton('unlike', li);
+    document.querySelector('.unlike').style.backgroundColor = "#ff9fa4";
+    document.querySelector('.unlike').classList.add('active');
+    addHeart(li);
+  } else {
     addButton('like', li);
-
-    if (songsSource[element].isLiked === true) {
-      let img = document.createElement('img');
-      img.src = '../images/like.svg';
-      img.setAttribute('alt', 'heart');
-      img.classList.add('like-icon');
-      img.style.verticalAlign = 'middle';
-      img.style.width = '7%';
-      li.append(img);
     }
 }
 
@@ -55,19 +59,36 @@ function addButton(className, parent) {
   parent.append(input);
 }
 
-// не обращай внимания, я думала как добавить логику на кнопки :)
-// пусть побудет здесь
+function addHeart(li) {
+  let img = document.createElement('img');
+  img.src = 'images/like.svg';
+  img.setAttribute('alt', 'heart');
+  img.classList.add('like-icon');
+  img.style.verticalAlign = 'middle';
+  img.style.width = '7%';
+  li.append(img);
+}
 
-// document.querySelector('.like').addEventListener('click', function like() {
-//   songsSource[target].isLiked = true;
-//   removeList();
-//   addSong();
-// })
+songsList.addEventListener('click', function click(e) {
+  let target = e.target;
+  if (target.className.includes('like') && !(target.className.includes('active'))) {
+    target.classList.add('active');
+    target.value = 'unlike';
+    let li = target.parentNode;
+    addHeart(li);
+  } else {
+    target.classList.remove('active');
+    target.value = 'like';
+    target.parentNode.lastChild.remove();
+  }
+  
+  if (target.className.includes('delete')) {
+    target.parentNode.remove();
+  }
+  countSongs();
+})
 
-
-// function removeList() {
-//   for (key of document.querySelectorAll('li')) {
-//     key.remove();
-//   }
-// }
+function countSongs() {
+  count.innerHTML = `${songsList.childNodes.length}`  
+}
 
