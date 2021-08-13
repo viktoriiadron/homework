@@ -40,7 +40,7 @@ function addSong(element) {
     songsList.append(li);
     addButton('delete', li);
   
-  if (songsSource[element].isLiked === true) {
+  if (songsSource[element].isLiked) {
     addButton('unlike', li);
     document.querySelector('.unlike').style.backgroundColor = "#ff9fa4";
     document.querySelector('.unlike').classList.add('active');
