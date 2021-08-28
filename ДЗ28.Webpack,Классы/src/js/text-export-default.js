@@ -17,9 +17,9 @@ export class Dog extends Animal {
 }
 
 export class Cat extends Animal {
-    constructor(nickname, food, location, isHomeless) {
+    constructor(nickname, food, location, isHomeless=true) { // по дефолту true
         super(nickname, food, location);
-        this.isHomeless = true;
+        this.isHomeless = isHomeless;
     }
 }
 
@@ -30,7 +30,7 @@ export class Person {
     }
     
     getFullName() {
-        return firstName + ' ' + lastName;
+        return this.firstName + ' ' + this.lastName;
     }
 }
 
@@ -46,29 +46,29 @@ export class Hospital {
     }
 
     getFindingPetsPeople() {
-        return this.#findingPetsPeople;
+        return this.#findingPetsPeople; //когда get пишем return
     }
 
     addAnimal(animal) {
-        this.#illAnimals.push(animal)
+       this.#illAnimals.push(animal) //не добавлять return!! иначе возвратится длина массива.
     }
 
     addPeople(...people) {
-        this.#findingPetsPeople.push(...people)
+        this.#findingPetsPeople.push(...people) // все правильно, всех людей
     }
 
     findHome(nickname) {
-        if (this.#illAnimals.find(nickname)) {
+        if (this.#illAnimals.find(nickname)) { //include можно использовать
             return  {
                 status: 'restricted',
                 message: `We need to heal ${nickname.nickname} firstly`,
             }            
         } else {
-            this.#findingPetsPeople.splice(
-                Math.random() * this.#findingPetsPeople.length(), 1)
+            let [person] = this.#findingPetsPeople.splice(
+               Math.floor(Math.random() * this.#findingPetsPeople.length()), 1)
             return {
                 status: 'success',
-                name: `${this.firstName} ${this.lastName}`,
+                name: person.getFullName(), //person.getFullName()
             };
         }
 
@@ -80,11 +80,10 @@ export class Veterinarian extends Person {
     constructor(firstName, lastName, hospital) {
         super(firstName, lastName);
         this.hospital = hospital;
-
     }
 
     getFullName() {
-        return `${this.firstName} ${this.lastName} works in ${this.hospital}`
+        return `${super.getFullName()} works in ${this.hospital.name}`
     }
 
     _setDiagnosis(nickname) {
@@ -99,13 +98,13 @@ export class Veterinarian extends Person {
                 diagnosis: `ill`,
                 info: `change food. Now ${nickname.nickname} eats ${nickname.food}`,
             }
-        } else if (nickname.isHomeless === true) {
-            findHome(nickname);
+        } else if (nickname.isHomeless) {
+            this.hospital.findHome(nickname);
             return {
                 diagnosis: `healthy`,
                 info: `change home. Now ${this.firstName} ${this.lastName} have a new friend - ${nickname.nickname}`,
             }
-        } else if (nickname.isHomeless === false) {
+        } else if (!nickname.isHomeless) {
             return {
                 diagnosis: `ill`,
                 info: `${nickname.nickname} has a home`,
@@ -118,12 +117,12 @@ export class Veterinarian extends Person {
         }
     }
 
-    treatAnimal(nickname, location) {
-        _setDiagnosis(nickname);
+    treatAnimal(nickname) {
+        this._setDiagnosis(nickname);
         if (nickname.diagnosis === 'ill') {
-            addAnimal(nickname);
+            this.hospital.addAnimal(nickname);
             return {
-                info:  `${nickname} from ${location}`,
+                info:  `${nickname.nickname} from ${nickname.location}`,
                 fullDiagnos: `${nickname.diagnosis}: ${nickname.info}`,
             }
         }
