@@ -50,7 +50,7 @@ class University {
     }
 
     getBugjetStudents() {
-        return this.students.filter(student => student.isSelfPayment === false);
+        return this.students.filter(student => !student.isSelfPayment);
     }
 }
 
