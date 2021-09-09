@@ -1,43 +1,17 @@
-import React from 'react';
 import './App.css';
-import songs from './sourse.js';
+import Count from './components/Count';
+import SongList from './components/SongList'
 
 function App() {
-
-  function count(array) {
-    return array.length
-  }
-
-  function createLike() {
-    return (<button class='button like'>Like</button> )
-  }
-
-  function cleateDelBut() {
-    return (
-      <button class='button delete'>Delete</button>
-    )
-  }
-
-  function addSong(element) {
-    return (
-      <li>
-        {element.id} {element.name}, author: {element.author},
-        year: {element.releaseDate}, album: {element.albumName}
-        {cleateDelBut()}
-        {createLike()}
-      </li>
-    )
-  }
-
   return (
-    <div className="App">
+     <div className="App">
      <h2>Playlist</h2>
     <input class="input-box" type="text" placeholder="Song..." />
     <input class="button add" type="button" value="Add new song" />
     <div class="songs-wrapper">
-        <ul class="songs">{songs.forEach(el => addSong(el))}</ul>
+        <ul class="songs"><SongList/></ul>
     </div>
-      <p class="count-title">Count of songs: <span class="count"> {count(songs)} </span></p>
+      <p class="count-title">Count of songs: <Count/> <span class="count"> </span></p>
     </div>
   );
 }
