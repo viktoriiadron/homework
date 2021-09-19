@@ -1,14 +1,16 @@
 import SongItem from "./SongItem";
 import songs from '../sourse';
 import { useState } from 'react';
+import CustomInput from './CustomInput'
 
 function SongList() {
     
-    const [todos, SetTodos] = useState(songs);
+    const [song, SetSong] = useState(songs);
+
     
     return (
         <div>
-            {todos.map(element => <SongItem song={element} key={element.id} />)}
+            {song.map(element => <SongItem song={element} key={element.id} />)}
         </div>
     )
 }

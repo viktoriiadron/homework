@@ -1,7 +1,8 @@
 
- function CleateDelBut() {
+function ButtonDel({deleteSong}) {
+
     return (
-      <button class='button delete'>Delete</button>)
+      <button class='button delete' onClick={deleteSong}>Delete</button>)
   }
    
-export default CleateDelBut;
+export default ButtonDel;

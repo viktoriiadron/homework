@@ -1,13 +1,13 @@
 import './App.css';
 import Count from './components/Count';
-import SongList from './components/SongList'
+import SongList from './components/SongList';
+import CustomInput from './components/CustomInput';
 
 function App() {
   return (
      <div className="App">
      <h2>Playlist</h2>
-    <input class="input-box" type="text" placeholder="Song..." />
-    <input class="button add" type="button" value="Add new song" />
+    <CustomInput/>
     <div class="songs-wrapper">
         <ul class="songs"><SongList/></ul>
     </div>
