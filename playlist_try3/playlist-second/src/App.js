@@ -17,16 +17,16 @@ function App() {
     setSong_items(song_items.filter((songItem) => songItem.id !== id))
       }
   
-  const likeFn = (song) => {
+  const likeFn = (id) => {
 
-    if (song.isLiked) {
-      song.isLiked = false;
-
-      // console.log(song)
-    } else {
-      song.isLiked = true;
-      //console.log(song);
-    };
+    setSong_items(song_items.map((songItem) => {
+      if (songItem.id === id) {
+        if (songItem.isLiked) {
+          songItem.isLiked = false
+        } else songItem.isLiked = true
+      }
+      return songItem;
+    }))
   } 
 
   return (

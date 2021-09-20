@@ -4,7 +4,7 @@ function ButtonLike({ song, likeFn }) {
 
     return (
         <>
-            <button className='button like' onClick={() => likeFn(song)}>
+            <button className='button like' onClick={() => likeFn(song.id)}>
                 {song.isLiked ? 'Liked' : 'Like'}
                 
             </button>
