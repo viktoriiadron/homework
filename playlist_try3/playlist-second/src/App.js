@@ -19,14 +19,12 @@ function App() {
   
   const likeFn = (id) => {
 
-    setSong_items(song_items.map((songItem) => {
-      if (songItem.id === id) {
-        if (songItem.isLiked) {
-          songItem.isLiked = false
-        } else songItem.isLiked = true
-      }
-      return songItem;
-    }))
+    setSong_items(song_items.map(
+      (songItem) => {
+        return songItem.id === id ?
+          { ...songItem, isLiked: !songItem.isLiked }
+          : songItem;
+      }))
   } 
 
   return (
