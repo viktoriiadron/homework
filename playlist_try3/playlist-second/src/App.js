@@ -30,9 +30,7 @@ function App() {
           : songItem;
       }))
   }
-
   
-
   // const filteredSongs = useMemo(() => {
   //       return value ? song_items.filter(song =>
   //               song.name.toLowerCase()

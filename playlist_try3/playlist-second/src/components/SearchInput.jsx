@@ -16,14 +16,9 @@ function SearchInput({ songs, songState }) {
 
     const filteredSongs = useMemo(() => {
         return songs.filter(song =>
-                song.name.toLowerCase()
-                    .includes(value.toLowerCase())) 
-    }, [value, songs])
-
-    // const searchParams = (event) => {
-    //     setValue(event.target.value);
-    // }
-        
+            song.name.toLowerCase()
+                .includes(value.toLowerCase()))
+    }, [value, songs]);
 
     return (
         <>
