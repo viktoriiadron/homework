@@ -1,29 +1,23 @@
 import { useState } from "react"
 
-function LikeFilter({ songs, songState }) {
+function LikeFilter({ likedSongFilter, allSongsFilter }) {
+    const [isChecked, setIsChecked] = useState(false);
 
-    const [x, setX] = useState(false)
-
-    const filterLiked = () => {
+    const changeChekcboxState = () => {
+        setIsChecked(isChecked => !isChecked);
+        if (!isChecked) {
+            return likedSongFilter()
+        } else { allSongsFilter() };
         
-        setX(() => !x);
-
-        songState(() => {
-            if (x) {
-            return songs.filter((song) => song.isLiked).map(song => song)
-        }
-         else {
-            return songs
-        }   
-        })
     }
 
     return (<>
         <input
             type='checkbox'
             id='liked'
-            onChange={filterLiked}
-            checked={x}
+            
+            checked={isChecked}
+            onChange={changeChekcboxState}
         />
         <label htmlFor='liked' >Liked</label>
     </> );
