@@ -34,7 +34,7 @@ function Input({songs, addSong}) {
             value={newSong.author} name='author' placeholder='Song author'
             onChange={(event) => setNewSong({ ...newSong, author: event.target.value })}
         />
-        <input className="input-box" type="number"
+        <input className="input-box" type="date"
             value={newSong.releaseDate} name='releaseDate' placeholder='Date'
             onChange={(event) => setNewSong({ ...newSong, releaseDate: event.target.value })}
         />

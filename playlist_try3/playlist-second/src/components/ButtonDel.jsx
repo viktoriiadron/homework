@@ -1,4 +1,4 @@
-import { SongContext } from "../App";
+import { SongContext } from "../pages/Playlist";
 import { useContext } from "react";
 
 function ButtonDel({ song }) {

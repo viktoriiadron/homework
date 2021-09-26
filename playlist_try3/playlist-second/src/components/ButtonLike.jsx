@@ -1,4 +1,4 @@
-import { SongContext } from '../App';
+import { SongContext } from '../pages/Playlist';
 import like from '../img/like.svg';
 import { useContext } from 'react';
 
