@@ -1,7 +1,10 @@
+import { SongContext } from '../pages/Playlist';
 import like from '../img/like.svg';
+import { useContext } from 'react';
 
-function ButtonLike({ song, likeFn }) {
-
+function ButtonLike({ song }) {
+    const { likeFn } = useContext(SongContext);
+    
     return (
         <>
             <button className='button like' onClick={() => likeFn(song.id)}>

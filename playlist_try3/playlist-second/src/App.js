@@ -1,41 +1,22 @@
 import './App.css';
-import Input from './components/Input';
-import SongList from './components/SongList';
-import Count from './components/Count';
-import songs from './components/songs_source';
-import { useState } from "react";
+import React,  { useState } from "react";
+import { BrowserRouter } from 'react-router-dom';
+import NavBar from './components/NavBar';
+import AppRouter from './components/AppRouter';
+import { LoginContext } from './context/loginContext'
 
 function App() {
 
-  let [song_items, setSong_items] = useState(songs);
-
-  const addSong = (song) => {
-    setSong_items([...song_items, song]);
-  }
-
-      const deleteSong = (id) => {
-    setSong_items(song_items.filter((songItem) => songItem.id !== id))
-      }
-  
-  const likeFn = (id) => {
-
-    setSong_items(song_items.map(
-      (songItem) => {
-        return songItem.id === id ?
-          { ...songItem, isLiked: !songItem.isLiked }
-          : songItem;
-      }))
-  } 
+  const [isUserLogin, setIsUserLogin] = useState(false);
 
   return (
-    <div className="App">
-      <h2>Playlist</h2>
-      <Input songs={song_items} addSong={addSong} />
-      <div className="songs-wrapper">
-        <SongList songs={song_items} songState={setSong_items} deleteSong={deleteSong} likeFn={ likeFn}/>
-      </div>
-      <Count songs={ song_items}/>
-      </div>
+    <LoginContext.Provider value={{ isUserLogin, setIsUserLogin }}>
+      <BrowserRouter>
+        <NavBar />
+        <AppRouter />
+    </BrowserRouter>
+    </LoginContext.Provider>
+    
   );
 }
 
