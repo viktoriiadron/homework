@@ -1,0 +1,40 @@
+.app-wrapper {
+  margin: 20px;
+}
+
+.content-holder {
+  display: flex;
+}
+
+.video-container {
+  display: flex;
+  border: 1px solid #ccc;
+  align-items: space-between;
+  border-radius: 8px;
+  margin: 5px;
+}
+
+.title-container {
+  padding-left: 10px;
+  font-weight: 600;
+}
+
+.search-input {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.btn {
+  border: none;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  margin-left: 10px;
+}
+.btn:hover {
+  background-color: #ccc;
+}
+
+.img-container img {
+  max-width: 200px;
+}
