@@ -2,6 +2,10 @@
   margin: 20px;
 }
 
+.content-holder {
+  display: flex;
+}
+
 .video-container {
   display: flex;
   border: 1px solid #ccc;
@@ -29,4 +33,8 @@
 }
 .btn:hover {
   background-color: #ccc;
+}
+
+.img-container img {
+  max-width: 200px;
 }
